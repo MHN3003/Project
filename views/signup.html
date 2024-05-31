@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="img/Logoo.png" rel="icon" type="image/png">
+    <link rel="stylesheet" href="/assets/style.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Sign-Up</title>
+</head>
+<body>
+    <navbar id="navbar">
+        <a href="#" class="logo">Miin<span>K-Glow</span></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar" >
+            <li><a href="/">Home</a></li>
+            <li><a href="/#shop">shop</a></li>
+            <li><a href="/#new">New Arrival</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#brands">Our Partners </a></li>
+            <li><a href="/#contact">Contact</a></li>
+            <!-- <li><a href="#"><i class='bx bx-search-alt-2'></i></a></li> -->
+            <li><a href="/login"><i class='bx bx-log-in-circle'></i></a></li>
+            <li><a href="#"><i class='bx bx-cart'></i></a></li>
+        </ul>
+    
+    </navbar>
+    <script>
+        var navbar = document.getElementById("navbar");
+        navbar.classList.add("changed");
+    </script>
+
+    <div class="login">
+        <form action="/signup" method="POST">
+            <h2>Signup Form</h2> 
+            <p>welcome to our community!</p>
+            <div class="form">
+            <div class="input-container">
+                <input type="email" placeholder="Enter your email" id="email" name="email" required>
+                <i class="fa fa-envelope input-icon" aria-hidden="true"></i>
+            </div>
+
+              <div class="input-container">
+                <input type="text" placeholder="Enter your user name" id="username" name="username" required>
+                <i class="fas fa-user input-icon"></i>
+              </div>
+             
+              <input type="text" placeholder="Enter your first name" id="firstname" name="firstname" >
+              
+              <input type="text" placeholder="Enter your last name" id="lastname" name="lastname" >
+              
+              <div class="input-container">
+                <input type="date" id="birthdate" name="birthdate" required>
+              </div>
+            
+            <div class="input-container">
+                <select id="gender" name="gender" placeholder="Select a gender" required>
+                    <option id="op">Select your gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <div class="password-container">
+                <input type="password"  placeholder="Enter your password" id="Password" name="Password" required>
+                <i class="fa fa-eye-slash password-toggle" aria-hidden="true"></i>
+              </div>
+              <div class="password-container">
+                <input type="password"  placeholder="Confirm your password" id="cpassword" name="cpassword" required>
+                <i class="fa fa-eye-slash Password-toggle" aria-hidden="true"></i>
+              </div>
+        </div>
+            <button type="submit">Submit</button>
+            <p>You already have an account?<a href="/login">login from here</a>.</p>
+            <p id="errorMessage" style="color: red; display: none;"></p>
+        </form>
+    </div>
+    <script>
+         var passwordInput = document.getElementById('Password');
+      var passwordToggle = document.querySelector('.password-toggle');
+      passwordToggle.addEventListener('click', function() {
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          passwordToggle.classList.remove('fa-eye-slash');
+          passwordToggle.classList.add('fa-eye');
+        } else {
+          passwordInput.type = 'password';
+          passwordToggle.classList.remove('fa-eye');
+          passwordToggle.classList.add('fa-eye-slash');
+        }
+      });
+
+      var PasswordInput = document.getElementById('cpassword');
+      var PasswordToggle = document.querySelector('.Password-toggle');
+      PasswordToggle.addEventListener('click', function() {
+        if (PasswordInput.type === 'password') {
+          PasswordInput.type = 'text';
+          PasswordToggle.classList.remove('fa-eye-slash');
+          PasswordToggle.classList.add('fa-eye');
+        } else {
+          PasswordInput.type = 'password';
+          PasswordToggle.classList.remove('fa-eye');
+          PasswordToggle.classList.add('fa-eye-slash');
+        }
+      });
+    </script>  
+</body>
+</html>

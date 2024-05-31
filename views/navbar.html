@@ -1,0 +1,31 @@
+<navbar id="navbar">
+    <a href="#" class="logo">Miin<span>K-Glow</span></a>
+    <div class="bx bx-menu" id="menu-icon"></div>
+    <ul class="navbar">
+        <li><a href="/#home">Home</a></li>
+        <li><a href="/#shop">shop</a></li>
+        <li><a href="/#new">New Arrival</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#brands">Our Partners </a></li>
+        <li><a href="/#contact">Contact</a></li>
+        <!-- <li><a href="#"><i class='bx bx-search-alt-2'></i></a></li> -->
+        <% if (user) { %>
+            <li class="dropdown">
+                <a href="#" class="user-icon"><i class='bx bx-user'></i></a>
+                <div class="dropdown-content">
+                    <a href="/userprofile">Profile</a>
+                    <form action="/logout" method="POST">
+                   <button type="submit"><i class='bx bx-log-out-circle'> Logout</i></button>
+                  </form>
+                </div>
+            </li>
+        <% } else { %>
+            <li><a href="/login"><i class='bx bx-log-in-circle'></i></a></li>
+        <% } %>
+        <li> <div class="iconCart">
+            <a><i class='bx bx-cart'></i></a>
+            <div class="totalQuantity">0</div>
+        </div>
+           </li>
+    </ul>
+  </navbar>

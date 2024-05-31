@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="img/Logoo.png" rel="icon" type="image/png">
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Include Slick Carousel CSS and JavaScript files -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <title>ShopAll</title>
+</head>
+
+<body>
+  <%- include("navbar.html") %>
+  <script>
+        var navbar = document.getElementById("navbar");
+        navbar.classList.add("changed");
+  </script>
+    
+   <div class="menu-btn" id="menuButton">
+    <span class="material-symbols-outlined">filter_alt</span>
+  </div>
+  <div class="side-bar" id="sidebar">
+    <header class="filters">
+    <div class="close-btn" id="closeButton">
+      <span class="material-symbols-outlined">filter_alt_off</span>
+    </div>
+        <br>
+         <h1>Filters</h1>
+         <p>To customize your search</p>
+         <br>
+       </header>
+    <div class="menu">
+      <div class="item">
+        <a class="sub-btn">Skin Type<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <ul>
+              <br>
+           <li>
+            <input type="radio" id="oily" value="OILY SKIN" name="skintype" onchange="handleFilterChange()">
+            <label for="oily">OILY SKIN</label>
+           </li> 
+           <br>
+            <li>
+              <input type="radio" id="dry" value="DRY SKIN" name="skintype" onchange="handleFilterChange()">
+              <label for="dry">DRY SKIN</label>
+            </li>
+            <br>
+            <li>
+              <input type="radio" id="combination" value="COMBINATION SKIN" name="skintype" onchange="handleFilterChange()">
+              <label for="combination">COMBINATION SKIN</label>  
+            </li>
+            <br>
+            <li>
+              <input type="radio" id="sensitive" value="SENSITIVE SKIN" name="skintype" onchange="handleFilterChange()">
+              <label for="sensitive">SENSITIVE SKIN</label>
+            </li>
+            <br>
+          </ul>
+          </div>
+      </div>
+
+      <div class="item">
+        <a class="sub-btn">Products' Category<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <ul>
+              <br>
+           <li>
+            <input type="radio" id="sunscreen" value="sunscreen" name="category" onchange="handleFilterChange()">
+            <label for="sunscreen">SUNSCREEN</label>
+           </li> 
+           <br>
+            <li>
+              <input type="radio" id="cleanser" value="cleanser" name="category" onchange="handleFilterChange()">
+              <label for="cleanser">CLEANSER</label>
+            </li>
+            <br>
+            <li>
+              <input type="radio" id="moisturizer" value="moisturizer" name="category" onchange="handleFilterChange()">
+              <label for="moisturizer">MOISTURIZER</label>  
+            </li>
+            <br>
+            <li>
+              <input type="radio" id="essence&toners" value="essence&toners" name="category" onchange="handleFilterChange()">
+              <label for="essence&toners">ESSENCE&TONERS</label>
+            </li>
+            <br>
+            <li>
+              <input type="radio" id="serum"  value="serum"  name="category" onchange="handleFilterChange()">
+              <label for="serum">SERUM</label>
+            </li>
+            <br>
+          </ul>
+          </div>
+      </div>
+      <div class="item">
+        <a class="sub-btn">Skin Concerns<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <ul>
+              <br>
+           <li>
+            <input type="radio" id="ACNE & BREAKOUTS" value=" ACNE & BREAKOUTS" name="concerns" onchange="handleFilterChange()">
+            <label for="ACNE & BREAKOUTS">ACNE & BREAKOUTS</label>
+           </li> 
+           <br>
+            <li>
+              <input type="radio" id="DRYNESS" value="DRYNESS" name="concerns" onchange="handleFilterChange()">
+              <label for="DRYNESS">DRYNESS</label>
+            </li>
+            <br>
+            <li>
+              <input type="radio" id="PORES & SEBUM" value="PORES & SEBUM" name="concerns" onchange="handleFilterChange()">
+              <label for="pores">PORES & SEBUM</label>  
+            </li>
+            <br>
+            <li>
+              <input type="radio" id="WRINKLES" value="WRINKLES" name="concerns" onchange="handleFilterChange()">
+              <label for="WRINKLES">WRINKLES</label>
+            </li>
+            <br>
+            <li>
+              <input type="radio" id="DULLNESS & UNEVEN TONE" value="DULLNESS & UNEVEN TONE" name="concerns" onchange="handleFilterChange()">
+              <label for="DULLNESS & UNEVEN TONE">DULLNESS & UNEVEN TONE</label>
+            </li>
+            <br>
+          </ul>
+          </div>   
+      </div>
+      <div class="item">
+        <button id="clearFiltersButton" onclick="clearFilters()">Clear Filters</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  function handleFilterChange() {
+    // Get selected skin type
+    let skinType = document.querySelector('input[name="skintype"]:checked')?.value || null;
+
+    // Get selected category
+    let category = document.querySelector('input[name="category"]:checked')?.value || null;
+
+    // Get selected concerns
+    let concerns = document.querySelector('input[name="concerns"]:checked')?.value || null;
+
+    // Perform filtering based on the selected filters
+    filterProducts(skinType, category, concerns);
+}
+
+function filterProducts(skinType, category, concerns) {
+    // Select all product elements
+    let productElements = document.querySelectorAll('.box');
+
+    productElements.forEach(product => {
+        // Get product attributes
+        let productSkinType = product.getAttribute('data-skintype');
+        let productCategory = product.getAttribute('data-category');
+        let productConcerns = product.getAttribute('data-concerns');
+
+        // Check if product matches the selected filters
+        let matchesSkinType = !skinType || productSkinType === skinType;
+        let matchesCategory = !category || productCategory === category;
+        let matchesConcerns = !concerns || productConcerns === concerns;
+
+        // Show or hide the product based on filter match
+        if (matchesSkinType && matchesCategory && matchesConcerns) {
+            product.classList.remove('hide');
+        } else {
+            product.classList.add('hide');
+        }
+    });
+}
+function clearFilters() {
+    // Clear all selected radio buttons
+    let radioButtons = document.querySelectorAll('input[type="radio"]:checked');
+    radioButtons.forEach(button => {
+        button.checked = false;
+    });
+
+    // Reset product display
+    let productElements = document.querySelectorAll('.box');
+    productElements.forEach(product => {
+        product.classList.remove('hide');
+    });
+}
+
+    </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    //jquery for toggle sub menus
+    $('.sub-btn').click(function(){
+      $(this).next('.sub-menu').slideToggle();
+      $(this).find('.dropdown').toggleClass('rotate');
+    });
+
+    //jquery for expand and collapse the sidebar
+    $('.menu-btn').click(function(){
+      $('.side-bar').addClass('active');
+      $('.menu-btn').css("visibility", "hidden");
+    });
+
+    $('.close-btn').click(function(){
+      $('.side-bar').removeClass('active');
+      $('.menu-btn').css("visibility", "visible");
+    });
+  });
+  </script>
+  <script>
+function toggleSidebar() {
+    var sidebar = document.getElementById('sidebar');
+    var shopContainer = document.getElementById('shopContainer');
+    
+    // Toggle 'active' class on sidebar
+    sidebar.classList.toggle('active');
+    
+    // Check if sidebar has 'active' class
+    if (sidebar.classList.contains('active')) {
+        // If sidebar is active, adjust margin-left of shop-container
+        shopContainer.style.marginLeft = '250px'; // Adjust this value as needed
+    } else {
+        // If sidebar is not active, reset margin-left of shop-container
+        shopContainer.style.marginLeft = '0';
+    }
+}
+function togglesidebar() {
+    var sidebar = document.getElementById('sidebar');
+    var shopContainer = document.getElementById('shopContainer');
+    
+        // If sidebar is not active, reset margin-left of shop-container
+        shopContainer.style.marginLeft = '0';
+    
+}
+// Call the toggleSidebar function when the menu button is clicked
+document.getElementById('menuButton').addEventListener('click', toggleSidebar);
+
+document.getElementById('closeButton').addEventListener('click', togglesidebar);
+  </script>
+ <div class="cart">
+  <h2>
+      CART
+  </h2>
+
+  <div class="listCart">
+      <div class="item">
+          
+          <div class="content">
+              <div class="name"></div>
+              <div class="price"></div>
+          </div>
+          <div class="quantity">
+              <button></button>
+              <span class="value"></span>
+              <button></button>
+          </div>
+      </div>
+
+
+  </div>
+
+  <div class="buttons">
+      <div class="close">
+          CLOSE
+      </div>
+      <div class="checkout">
+          <a href="checkout">CHECKOUT</a>
+      </div>
+  </div>
+</div>    
+  <section class="shop" id="shopContainer" >
+    <br> <br> <br>
+        <!-- Content -->
+        <div class="shop-container" data-filter="all">
+          <% products.forEach((product)=>{ %>
+              <%- include("product_item.html",{pro:product}) %>
+           <%}) %>
+      </div>
+      <br> 
+      <div class="pagination">
+        <% for(let i=1; i<=totalPages; i++) { %>
+            <a href="/shopall?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+        <% } %>
+      </div>
+  </section>
+  <section class="footer" id="footer">
+    <div class="footer-box">
+        <h2><span>Miin</span>K-Glow</h2>
+        <p>Our mission is to empower individuals <br> to embrace
+         their natural beauty and unlock their skin's full potential 
+         through the transformative power of K-beauty. </p>
+        <div class="social">
+            <a href="#"><i class='bx bxl-facebook'></i></a>
+            <a href="#"><i class='bx bxl-twitter'></i></a>
+            <a href="#"><i class='bx bxl-instagram'></i></a>
+        </div>
+    </div>
+    <div class="footer-box">
+        <h3>Services</h3>
+        <li><a href="#">Product</a></li>
+        <li><a href="#">Help & Support</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">FAQ</a></li>
+    </div>
+    <div class="footer-box">
+        <h3>Product</h3>
+        <li><a href="#">Sunscreen</a></li>
+        <li><a href="#">Moisturizer</a></li>
+        <li><a href="#">Cleanser</a></li>
+        <li><a href="#">Essence&Toners</a></li>
+        <li><a href="#">Serum</a></li>
+    </div>
+    <div class="footer-box contact-info">
+        <h3>Contact</h3>
+        <li>Annaba,Algeria</li>
+        <li>+213 666 55 44 33</li>
+        <li>Miin-KGlow@gmail.com</li>
+    </div>
+  </section>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

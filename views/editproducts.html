@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+     <!-- Favicon -->
+     <link href="img/Logoo.png" rel="icon" type="image/png">
+     <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/admin.css">
+    <style>
+   
+      .success-message {
+          color: green;
+          margin-top: 10px;
+          margin-left: 220px;
+          margin-bottom: 10px;
+      }
+  
+      .error-message {
+          color: red;
+          margin-bottom: 10px;
+          margin-left: 220px;
+      }
+      .hidden {
+              display: none;
+          }
+  </style>
+</head>
+<body>
+     <!-- Sidenav -->
+     <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+            <a class="logo" href="/admin">
+              Miin<span>K-Glow</span>
+              </a>
+            <!-- Navigation -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin">
+                  <i class="ni ni-tv-2 text-primary"></i> Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">
+                  <i class="ni ni-single-02 text-yellow"></i> Admin profile
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/addproducts">
+                  <i class="ni ni-planet text-blue"></i> Add products
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/productslist">
+                  <i class="ni ni-pin-3 text-orange"></i> Edit products
+                </a>
+              </li>
+            </ul>
+            <!-- Divider -->
+            <hr class="my-3">
+            <!-- Heading -->
+            <div class="salles">
+              <a href="#">Manage salles</a>  
+            </div> 
+          </div>
+        </div>
+      </nav>
+    <div class="editproduct">
+    <h1>Edit Product</h1>
+    <form action="/editproducts/<%= product.proID %>" method="POST">
+      <div class="form-group">
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" value="<%= product.name %>"required>
+          </div>
+          <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category"  required>
+                    <!-- Categories will be populated dynamically -->
+                </select>
+          </div>
+          <div class="form-group">
+            <label for="name">Volume:</label>
+            <input type="text" id="volume" name="volume" value="<%= product.volume %>" required>
+          </div>
+          <div class="form-group">
+            <label for="skintype">Skin type:</label>
+            <select id="skintype" name="skintype"  required>
+              <!-- Categories will be populated dynamically -->
+          </select>
+          </div>
+          <div class="form-group">
+            <label for="skinconcerns">Skin Concerns:</label>
+            <select id="skinconcerns" name="skinconcerns"  required>
+              <!-- Categories will be populated dynamically -->
+          </select>
+         </div>
+          <div class="form-group">
+                <label for="price">Price:</label>
+                <input  id="price" name="price" value="<%= product.price %>" required>
+          </div>
+          <div class="form-group">
+                <label for="image">Image Link:</label>
+                <input type="text" id="image" name="image" value="<%= product.image %>" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required><%= product.description %> </textarea>
+          </div>
+          <div class="form-group">
+            <label for="ingredients">Ingredients:</label>
+            <textarea id="ingredients" name="ingredients" required><%= product.ingredients %> </textarea>
+          </div>
+          <div class="form-group">
+            <label for="instructions">Instructions:</label>
+            <textarea id="instructions" name="instructions" required><%= product.instructions %> </textarea>
+          </div>
+          <!-- <div class="form-group">
+            <label for="pairswell">Pairs well with:</label>
+            <input type="text" id="pairswell" name="pairswell" value="<%= product.pairswellwith %>" required></textarea>
+          </div> -->
+          <div class="form-group">
+            <label for="detail1">Image Details 1:</label>
+            <input type="text" id="detail1" name="detail1" value="<%= product.detail1 %>" required>
+          </div>
+          <div class="form-group">
+            <label for="detail2">Image Details 2:</label>
+            <input type="text" id="detail2" name="detail2" value="<%= product.detail2 %>" required>
+          </div>
+        <div class="form-group">
+          <label for="detail3">Image Details 3:</label>
+          <input type="text" id="detail3" name="detail3" value="<%= product.detail3 %>" required>
+        </div>
+        <div class="form-group">
+          <label for="isnew">New Collection:</label>
+          <input type="text" id="isnew" name="isnew" placeholder="TRUE or FALSE" required>
+        </div>
+        <!-- Add other fields as needed -->
+        <button type="submit">Update Product</button>
+    </form>
+    <% if (message) { %>
+      <div id="message" class="<%= message.includes('Error') ? 'error-message' : 'success-message' %>"><%= message %></div>
+  <% } %>  </div>
+
+  <script>
+    // Fetch categories dynamically using JavaScript
+    fetch('/categories')
+        .then(response => response.json())
+        .then(categories => {
+            const categorySelect = document.getElementById('category');
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.category; // Assuming 'category' is the field name in your database
+                option.textContent = category.category; // Assuming 'category' is the field name in your database
+                categorySelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching categories:', error);
+        });
+
+      // Fetch and populate skin types
+    fetch('/skintypes')
+        .then(response => response.json())
+        .then(skintypes => {
+            const skintypeSelect = document.getElementById('skintype');
+            skintypes.forEach(skintype => {
+                const option = document.createElement('option');
+                option.value = skintype.skintype;
+                option.textContent = skintype.skintype;
+                skintypeSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching skin types:', error);
+        });
+
+         // Fetch and populate skin concerns
+       fetch('/skinconcerns')
+        .then(response => response.json())
+        .then(concerns => {
+            const concernSelect = document.getElementById('skinconcerns');
+            concerns.forEach(concern => {
+                const option = document.createElement('option');
+                option.value = concern.skinConcerns;
+                option.textContent = concern.skinConcerns;
+                concernSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching skin concerns:', error);
+        });
+  </script>
+
+
+  <script>
+    // Function to hide the message after 10 seconds
+    window.onload = function() {
+        const messageElement = document.getElementById('message');
+        if (messageElement) {
+            setTimeout(() => {
+                messageElement.classList.add('hidden');
+            }, 10000); // 10000 milliseconds = 10 seconds
+        }
+    };
+</script>
+</body>
+</html>

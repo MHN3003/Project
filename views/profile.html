@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin profile</title>
+  <!-- Favicon -->
+  <link href="img/Logoo.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  
+  <!-- Argon CSS -->
+  <!-- <link type="text/css" href="css/argon.min.css?v=1.0.0" rel="stylesheet">* -->
+  <link rel="stylesheet" href="/assets/admin.css">
+
+</head>
+
+<body>
+    <!-- Sidenav -->
+    <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+            <a class="logo" href="/admin">
+              Miin<span>K-Glow</span>
+              </a>
+            <!-- Navigation -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin">
+                  <i class="ni ni-tv-2 text-primary"></i> Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">
+                  <i class="ni ni-single-02 text-yellow"></i> Admin profile
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/addproducts">
+                  <i class="ni ni-planet text-blue"></i> Add products
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/maps">
+                  <i class="ni ni-pin-3 text-orange"></i> Edit products
+                </a>
+              </li>
+            </ul>
+            <!-- Divider -->
+            <hr class="my-3">
+            <!-- Heading -->
+            <div class="salles">
+              <a href="#">Manage salles</a>  
+            </div> 
+          </div>
+        </div>
+      </nav>
+    
+    
+<div class="container">
+  <h1>Welcome to your profile!</h1>
+  <p>Email: <%= userData.email %></p>
+  <p>Name: <%= userData.name %></p>
+  <!-- Display other admin data as needed -->
+
+  <!-- Logout button -->
+  <form action="/logout" method="POST">
+      <button type="submit">Logout</button>
+  </form>
+</div>
+  </body>
+  
+  

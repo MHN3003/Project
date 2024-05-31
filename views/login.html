@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="img/Logoo.png" rel="icon" type="image/png">
+    <link rel="stylesheet" href="/assets/style.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Log-In</title>
+</head>
+<body>
+    <navbar id="navbar">
+        <a href="#" class="logo">Miin<span>K-Glow</span></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar" >
+            <li><a href="/">Home</a></li>
+            <li><a href="/#shop">shop</a></li>
+            <li><a href="/#new">New Arrival</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#brands">Our Partners </a></li>
+            <li><a href="/#contact">Contact</a></li>
+            <!-- <li><a href="#"><i class='bx bx-search-alt-2'></i></a></li> -->
+            <li><a href="/login"><i class='bx bx-log-in-circle'></i></a></li>
+            <li><a href="#"><i class='bx bx-cart'></i></a></li>
+        </ul>
+    </navbar>
+    <script>
+        var navbar = document.getElementById("navbar");
+        navbar.classList.add("changed");
+    </script>
+
+    <div class="login">
+        <form form action="/login" method="POST"  id="loginForm">
+            <h2>Login Form</h2>
+            <p>Happy to have you again!</p>
+            <div class="input-container">
+                <input type="email" placeholder="Enter your email" id="email" name="email" required>
+                <i class="fa fa-envelope input-icon" aria-hidden="true"></i>
+              </div>
+              
+            <div class="password-container">
+                <input type="password"  placeholder="Enter your password" id="password" name="password" required>
+                <i class="fa fa-eye-slash password-toggle" aria-hidden="true"></i>
+              </div>
+            <button type="submit">Submit</button>
+            <p>Don't have an account?<a href="/signup">join us from here</a>.</p>
+            <% if (message) { %>
+                <div id="message" class="<%= message.includes('Error') ? 'error-message' : 'success-message' %>"><%= message %></div>
+              <% } %>
+          </div>
+        </form>
+       
+    </div>  
+    <script src="/assets/main.js"></script>
+    <style>
+    
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+            margin-left: 15px;
+        }
+        .hidden {
+                display: none;
+            }
+    </style>
+    <script>
+        // Function to hide the message after 10 seconds
+        window.onload = function() {
+            const messageElement = document.getElementById('message');
+            if (messageElement) {
+                setTimeout(() => {
+                    messageElement.classList.add('hidden');
+                }, 10000); // 10000 milliseconds = 10 seconds
+            }
+        };
+    </script>
+</body>
+</html>

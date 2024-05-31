@@ -1,0 +1,11 @@
+new Collection
+<% newProducts.forEach(product => { %>
+    <%- include("newcollection.html",{pro:product}) %>
+    <%}) %>
+
+shopall
+<% products.forEach((product)=>{ %>
+    <%- include("product_item.html",{pro:product}) %>
+ <%}) %>
+
+ 

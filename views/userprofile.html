@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=de vice-width, initial-scale=1.0">
+<link href="img/Logoo.png" rel="icon" type="image/png">
+<title>User Profile</title>
+<link rel="stylesheet" href="/assets/style.css">
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <%- include("navbar.html") %>
+    <script>
+        var navbar = document.getElementById("navbar");
+        navbar.classList.add("changed");
+    </script>
+    
+    <div class="cart">
+      <h2>
+          CART
+      </h2>
+
+      <div class="listCart">
+          <div class="item">
+              <img src="">
+              <div class="content">
+                  <div class="name"></div>
+                  <div class="price"></div>
+                  
+              </div>
+              <div class="quantity">
+                  <button></button>
+                  <span class="value"></span>
+                  <button></button>
+              </div>
+          </div>
+      </div>
+      <div class="buttons">
+          <div class="close">
+              CLOSE
+          </div>
+          <div class="checkout">
+              <a href="checkout">CHECKOUT</a>
+          </div>
+          
+      </div>
+  </div>
+
+     <h1>My Profile</h1>
+     <section class="main">
+        <div class="profile-card">
+          <i class='bx bx-user'></i>
+          <div class="data">
+            <h2><%= user.username %></h2>
+            <span><%= user.email %></span>
+          </div>
+          <div class="row">
+            <div class="userinfo">
+              <h3>First Name</h3>
+              <span><%= user.clientfirstname %></span>
+            </div>
+            <div class="userinfo">
+              <h3>Last Name</h3>
+              <span><%= user.clientlastname %></span>
+            </div>
+            <div class="userinfo">
+              <h3>Gender</h3>
+              <span><%= user.gender %></span>
+            </div>
+           
+            <div class="userinfo">
+                <h3>skintype</h3>
+                <span><%= user.skintype %></span>
+            </div>
+          </div>
+          <div class="userbuttons">
+            <a href="#" class="btn">My purchases</a>
+            <a href="#" class="btn">Edit profile</a>
+          </div>
+        </div>
+      </section>
+    <!-- <div class="usercontainer">
+        <h1>Welcome <%= user.username %></h1>
+        <p>Email: <%= user.email %></p>
+    </div> -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@100;200;300;400;500&family=Dancing+Script:wght@400;500;600&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Whisper&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+h1{
+    font-family: Dancing Script;
+    font-size: 2.2rem;
+    font-weight: bolder;
+    margin-top: 100px;
+    margin-left: 45%;
+}
+.main{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
+  background-size: cover;
+}
+.profile-card{
+  margin-top: -20%;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 25px;
+  padding: 30px;
+  border: 1px solid #ffffff40;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+.data{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+.data h2{
+  font-size: 33px;
+  font-weight: 600;
+}
+.userinfo span{
+  font-size: 18px;
+}
+.row{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.row .userinfo{
+  text-align: center;
+  padding: 0 20px;
+}
+.userbuttons{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.userbuttons .btn{
+  color: #fff;
+  text-decoration: none;
+  margin: 0 20px;
+  padding: 8px 25px;
+  border-radius: 25px;
+  font-size: 18px;
+  white-space: nowrap;
+  background: linear-gradient(to left, #33ccff 0%, #ff99cc 100%);
+}
+.userbuttons .btn:hover{
+  box-shadow: inset 0 5px 20px rgba(0,0,0,0.4);
+}
+</style>
+<script src="/assets/app.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+
+<body>
+    <navbar id="navbar">
+        <a href="#" class="logo">Miin<span>K-Glow</span></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+        <ul class="navbar" >
+            <li><a href="/">Home</a></li>
+            <li><a href="/#shop">shop</a></li>
+            <li><a href="/#new">New Arrival</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#brands">Our Partners </a></li>
+            <li><a href="/#contact">Contact</a></li>
+            <!-- <li><a href="#"><i class='bx bx-search-alt-2'></i></a></li> -->
+            <% if (user) { %>
+                <li class="dropdown">
+                    <a href="#" class="user-icon"><i class='bx bx-user'></i></a>
+                    <div class="dropdown-content">
+                        <a href="/userprofile">Profile</a>
+                        <form action="/logout" method="POST">
+                       <button type="submit"><i class='bx bx-log-out-circle'> Logout</i></button>
+                      </form>
+                    </div>
+                </li>
+            <% } else { %>
+                <li><a href="/login"><i class='bx bx-log-in-circle'></i></a></li>
+            <% } %>
+            <!-- <li><a href="#"><i class='bx bx-cart'></i></a></li> -->
+        </ul>
+    </navbar>
+    <script>
+        var navbar = document.getElementById("navbar");
+        navbar.classList.add("changed");
+    </script>
+    <% if (user) { %>
+        
+        <!-- Render the cart items here -->
+        <div class="CHECKcontainer">
+            <div class="checkoutLayout">
+                <div class="returnCart">
+                    <h1>List Product in Cart</h1>
+                    <div class="list">
+                        <% cartItems.forEach((item, index) => { %>
+                            <div class="item">
+                                <img src="<%= item.imgSrc %>" alt="Product Image">
+                                <div class="info">
+                                    <div class="name"><%= item.name %></div>
+                                    <div class="price"><%= item.price %>/1 product</div>
+                                </div>
+                                <div class="quantity"><%= item.quantity %></div>
+                                <div class="returnPrice">$<%= (parseFloat(item.price.replace('$', '')) * item.quantity).toFixed(2) %></div>
+                                <!-- Hidden inputs to include item details in form submission -->
+                                <input type="hidden" name="items[<%= index %>][name]" value="<%= item.name %>">
+                                <input type="hidden" name="items[<%= index %>][price]" value="<%= item.price %>">
+                                <input type="hidden" name="items[<%= index %>][quantity]" value="<%= item.quantity %>">
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+
+                <form class="right" action="/checkout" method="POST">
+                    <h1>Checkout</h1>
+
+                    <div class="form" >
+                        <div class="group">
+                            <label for="name">Full Name</label>
+                            <input type="text" name="name" id="name" value="<%= userInfo.clientfirstname %>">
+                        </div>
+
+                        <div class="group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" name="phone" id="phone" value="<%= userInfo.phonenumber %>">
+                        </div>
+
+                        <div class="group">
+                            <label for="address">Address</label>
+                            <input type="text" name="address" id="address" value="<%= userInfo.FullAddress %>">
+                        </div>
+
+                        <div class="group">
+                            <label for="city">City</label>
+                            <select name="city" id="prefecture">
+                                <option value="">Choose..</option>
+                                <% prefectures.forEach(prefecture => { %>
+                                    <option value="<%= prefecture.prefecture %>"  price="<%= prefecture.price %>"><%= prefecture.prefecture %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        
+                        <div class="group">
+                            <label for="shippingprice">Shipping price</label>
+                            <br> <br>
+                            <div id="shippingprice" name="shippingPrice">$0.00</div>
+                        </div>
+                        <div class="return">
+                            <!-- <div class="row">
+                                <div>Total Quantity</div>
+                                <div class="totalQuantity"><%= totalQuantity %></div>
+                            </div> -->
+                            <div class="row">
+                                <div>Total Price</div>
+                                <div class="totalPrice" id="totalprice">$<%= totalPrice.toFixed(2) %></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="buttonCheckout">CHECKOUT</button>
+                    
+                </form>
+            </div>
+        </div>
+    <% } else { %>
+        <p>Please <a href="/login">login</a> to proceed with checkout.</p>
+    <% } %>
+    <script src="/assets/checkout.js"></script>
+    <script>
+        document.getElementById('prefecture').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var shippingPrice = selectedOption.getAttribute('data-price');
+            document.getElementById('shippingprice').innerText = '$' + parseFloat(shippingPrice).toFixed(2);
+            document.getElementById('hiddenShippingPrice').value = parseFloat(shippingPrice).toFixed(2);
+        });
+    </script>
+</body>
+</html>

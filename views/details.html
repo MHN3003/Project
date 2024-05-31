@@ -1,0 +1,145 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+<div class="product-images">
+    <div class="main-image">
+        <div class="box-img">
+            <img src="<%= pro.image %>" alt="Main Product Image" id="mainImage">
+        </div>
+    </div>
+    <div class="thumbnail-images">
+        <img src="<%= pro.image %>" alt="Main Product Image" class="thumbnail" onclick="changeMainImage(this)">
+        <img src="<%= pro.detail1 %>" alt="Thumbnail Image 1" class="thumbnail" onclick="changeMainImage(this)">
+        <img src="<%= pro.detail2 %>" alt="Thumbnail Image 2" class="thumbnail" onclick="changeMainImage(this)">
+        <img src="<%= pro.detail3 %>" alt="Thumbnail Image 3" class="thumbnail" onclick="changeMainImage(this)">
+        <!-- Add more thumbnail images as needed -->
+    </div>
+</div>
+<div class="box">
+    <div class="box-img" id="Extraimg" >
+        <a href="/product_detail?id=<%= pro.proID %>">
+            <img src="<%= pro.image %>" alt="Main Product Image" id="Extraimg">
+        </a>
+    </div>
+<div class="title-price">
+    <h3><%= pro.name %></h3>
+    <span><%= pro.price %></span> 
+    <br>
+    <div class="id"></div>
+    <div class="Stars">
+        <form id="ratingForm" class="FORMS" action="/submit-rating" method="post">
+            <div class="post">
+                <div class="text">Thanks for rating us!</div>
+            </div>
+            <div class="star-widget">
+                <input type="radio" name="rate" id="rate-5" value="5">
+                <label for="rate-5" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-4" value="4">
+                <label for="rate-4" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-3" value="3">
+                <label for="rate-3" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-2" value="2">
+                <label for="rate-2" class="fas fa-star"></label>
+                <input type="radio" name="rate" id="rate-1" value="1">
+                <label for="rate-1" class="fas fa-star"></label>
+                <header></header>
+                <div class="textarea">
+                    <textarea cols="30" placeholder="Describe your experience.." name="experience" id="experience"></textarea>
+                </div>
+                <div class="btnn">
+                    <button type="submit">Post</button>
+                </div>
+                <input type="hidden" name="productId" id="productId" value="<%= pro.proID %>">
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<i class='bx bx-cart-add' data-id="<%= pro.proID %>" data-name="<%= pro.name %>" data-price="<%= pro.price %>" data-image="<%= pro.image %>"></i>
+
+<div class="infos">
+    <ul>
+        <li onclick="toggleParagraph('description')" id="description-li">Description</li>
+        <li onclick="toggleParagraph('ingredients')" id="ingredients-li">Ingredients</li>
+        <li onclick="toggleParagraph('how-to-use')" id="how-to-use-li">How to Use</li>
+        <li onclick="toggleParagraph('pairs-well-with')" id="pairs-well-with-li">Pairs well with</li>
+    </ul>
+    <div id="description" class="paragraph">
+        <p><%= pro.description %></p>
+    </div>
+    <div id="ingredients" class="paragraph">
+        <p><%= pro.ingredients %></p>
+    </div>
+    <div id="how-to-use" class="paragraph">
+        <p><%= pro.instructions %></p>
+    </div>
+    <div id="pairs-well-with" class="paragraph">
+            <% pairs.forEach(pair => { %>
+                <% if (pair.pairID !== pro.productID) { %>
+                        <!-- Display Paired Product Image -->
+                        <img src="<%= pair.pairImage %>" alt="<%= pair.pairName %>">
+                        <!-- Display Paired Product Name -->
+                        <p><%= pair.pairName %></p>
+                <% } %>
+            <% }); %>
+    </div>
+</div>
+</div>
+<script>
+    const btn = document.querySelector("button");
+    const post = document.querySelector(".post");
+    const widget = document.querySelector(".star-widget");
+    const editBtn = document.querySelector(".edit");
+    btn.onclick = ()=>{
+      widget.style.display = "none";
+      post.style.display = "block";
+      editBtn.onclick = ()=>{
+        widget.style.display = "block";
+        post.style.display = "none";
+      }
+      return false;
+    }
+    document.getElementById('ratingForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+    
+        // Get the selected rating
+        let rating = 0;
+        const radios = document.getElementsByName('rate');
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                rating = parseInt(radios[i].value);
+                break;
+            }
+        }
+    
+        const description = document.getElementById('experience').value;
+        const productId = document.getElementById('productId').value;
+    
+        // Log the rating, description, and product ID
+        console.log("Rating:", rating);
+        console.log("Description:", description);
+        console.log("Product ID:", productId);
+    
+        // Send data to the server using fetch
+        fetch('http://localhost:5009/submit-rating', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ rating: rating, description: description, productId: productId })
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+            // Update the UI or show a success message
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    
+</script>
+<style>
+    #Extraimg{  
+        display: none;
+      
+    }
+</style>
